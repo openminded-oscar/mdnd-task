@@ -20,8 +20,8 @@ export class Owner extends Entity {
   @hasOne(() => Address)
   address: Address;
 
-  @hasMany(() => Pet)
-  pets: Pet[];
+  // @hasMany(() => Pet)
+  // pets: Pet[];
 
   constructor(data?: Partial<Owner>) {
     super(data);
