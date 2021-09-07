@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="285c4c02-2748-4184-9aac-04176f7b7754" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/backend/.dockerignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/.eslintignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/.eslintrc.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/.mocharc.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/.prettierignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/.prettierrc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/.vscode/launch.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/.vscode/settings.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/.vscode/tasks.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/.yo-rc.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/DEVELOPING.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/public/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/__tests__/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/__tests__/acceptance/home-page.acceptance.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/__tests__/acceptance/ping.controller.acceptance.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/__tests__/acceptance/test-helper.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/application.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/controllers/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/controllers/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/controllers/ping.controller.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/datasources/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/migrate.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/models/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/openapi-spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/repositories/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/sequence.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/tsconfig.json" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1xnjJz1ewwdzdb4OlrrJQcv3Q1P" />
+  <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+    <option name="autoscrollToSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="ts.external.directory.path" value="$PROJECT_DIR$/backend/node_modules/typescript/lib" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="285c4c02-2748-4184-9aac-04176f7b7754" name="Default Changelist" comment="" />
+      <created>1630997678787</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1630997678787</updated>
+      <workItem from="1630997679843" duration="1787000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
