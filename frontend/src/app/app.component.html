@@ -323,12 +323,12 @@
 <div class="content" role="main">
   <div class="lists-container">
     <mat-card>
-      <app-animals-list [displayedColumns]=petsDisplayedColumns>
+      <app-animals-list [displayedColumns]=petsDisplayedColumns [type]="'pet'">
       </app-animals-list>
     </mat-card>
 
     <mat-card>
-      <app-animals-list [displayedColumns]=wildAnimalsDisplayedColumns>
+      <app-animals-list [displayedColumns]=wildAnimalsDisplayedColumns [type]="'wild'">
       </app-animals-list>
     </mat-card>
   </div>

@@ -3,22 +3,18 @@ import { BehaviorSubject } from 'rxjs';
 import { Animal } from '../models/animal';
 import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { AbstractHttpService } from "./abstract.http.service";
+import { DialogDataService } from "./dialog.data.service";
 
 @Injectable()
 export class PetService extends AbstractHttpService<Animal> {
   dataChange: BehaviorSubject<Animal[]> = new BehaviorSubject<Animal[]>([]);
-  dialogData: any;
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient, private dialogDataService: DialogDataService) {
     super(httpClient, 'http://localhost:3000/pets')
   }
 
   get data(): Animal[] {
     return this.dataChange.value;
-  }
-
-  getDialogData() {
-    return this.dialogData;
   }
 
   getAllAnimals(): void {
@@ -32,7 +28,7 @@ export class PetService extends AbstractHttpService<Animal> {
 
   addItem(animal: Animal): void {
     this.save(animal).subscribe(data => {
-        this.dialogData = data.body;
+        this.dialogDataService.dialogData = data.body;
         alert('Successfully added');
       },
       (err: HttpErrorResponse) => {
@@ -42,7 +38,7 @@ export class PetService extends AbstractHttpService<Animal> {
 
   updateItem(animal: Animal): void {
     this.update(animal).subscribe(data => {
-        this.dialogData = data.body;
+        this.dialogDataService.dialogData = data.body;
         alert('Successfully edited');
       },
       (err: HttpErrorResponse) => {

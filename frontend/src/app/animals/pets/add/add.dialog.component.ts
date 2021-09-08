@@ -1,8 +1,9 @@
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import {Component, Inject} from '@angular/core';
-import {DataService} from '../../../services/data.service';
+
 import {FormControl, Validators} from '@angular/forms';
 import {Animal} from '../../../models/animal';
+import { PetService } from "../../../services/pet.service";
 
 @Component({
   selector: 'app-add.dialog',
@@ -10,10 +11,11 @@ import {Animal} from '../../../models/animal';
   styleUrls: ['./add.dialog.css']
 })
 
-export class AddDialogComponent {
-  constructor(public dialogRef: MatDialogRef<AddDialogComponent>,
+export class AddPetDialogComponent {
+  constructor(public dialogRef: MatDialogRef<AddPetDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: Animal,
-              public dataService: DataService) { }
+              public dataService: PetService
+  ) { }
 
   formControl = new FormControl('', [
     Validators.required
@@ -27,7 +29,7 @@ export class AddDialogComponent {
   }
 
   submit() {
-  // emppty stuff
+  // empty stuff
   }
 
   onNoClick(): void {

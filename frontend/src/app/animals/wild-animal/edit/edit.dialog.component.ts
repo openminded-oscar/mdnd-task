@@ -1,17 +1,19 @@
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import {Component, Inject} from '@angular/core';
-import {DataService} from '../../../services/data.service';
 import { FormControl, NgForm, Validators } from '@angular/forms';
+import { WildAnimalService } from "../../../services/wild-animal.service";
 
 @Component({
   selector: 'app-edit.dialog',
   templateUrl: './edit.dialog.html',
   styleUrls: ['./edit.dialog.css']
 })
-export class EditDialogComponent {
+export class EditWildAnimalDialogComponent {
 
-  constructor(public dialogRef: MatDialogRef<EditDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any, public dataService: DataService) { }
+  constructor(public dialogRef: MatDialogRef<EditWildAnimalDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: any,
+              public dataService: WildAnimalService
+  ) { }
 
   formControl = new FormControl('', [
     Validators.required

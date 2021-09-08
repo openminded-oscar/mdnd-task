@@ -5,9 +5,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AnimalsListComponent } from './animals/animals-list/animals-list.component';
-import { EditDialogComponent } from "./animals/dialogs/edit/edit.dialog.component";
-import { DeleteDialogComponent } from "./animals/dialogs/delete/delete.dialog.component";
-import { AddDialogComponent } from "./animals/dialogs/add/add.dialog.component";
+import { EditPetDialogComponent } from "./animals/pets/edit/edit.dialog.component";
+import { DeletePetDialogComponent } from "./animals/pets/delete/delete.dialog.component";
+import { AddPetDialogComponent } from "./animals/pets/add/add.dialog.component";
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -18,18 +18,27 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { DataService } from "./services/data.service";
 import { HttpClientModule } from "@angular/common/http";
 import { MatCardModule } from "@angular/material/card";
 import { PetService } from "./services/pet.service";
+import { DialogDataService } from "./services/dialog.data.service";
+import { WildAnimalService } from "./services/wild-animal.service";
+import { AddWildAnimalDialogComponent } from "./animals/wild-animal/add/add.dialog.component";
+import { EditWildAnimalDialogComponent } from "./animals/wild-animal/edit/edit.dialog.component";
+import { DeleteWildAnimalDialogComponent } from "./animals/wild-animal/delete/delete.dialog.component";
 
 @NgModule({
   declarations: [
     AppComponent,
+
     AnimalsListComponent,
-    AddDialogComponent,
-    EditDialogComponent,
-    DeleteDialogComponent
+    AddPetDialogComponent,
+    EditPetDialogComponent,
+    DeletePetDialogComponent,
+
+    AddWildAnimalDialogComponent,
+    EditWildAnimalDialogComponent,
+    DeleteWildAnimalDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +57,7 @@ import { PetService } from "./services/pet.service";
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [DataService, PetService],
+  providers: [WildAnimalService, PetService, DialogDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

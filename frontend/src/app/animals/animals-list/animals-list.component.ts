@@ -1,15 +1,17 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { MatDialog } from "@angular/material/dialog";
-import { AddDialogComponent } from "../dialogs/add/add.dialog.component";
-import { EditDialogComponent } from "../dialogs/edit/edit.dialog.component";
-import { DeleteDialogComponent } from "../dialogs/delete/delete.dialog.component";
+import { AddPetDialogComponent } from "../pets/add/add.dialog.component";
+import { EditPetDialogComponent } from "../pets/edit/edit.dialog.component";
+import { DeletePetDialogComponent } from "../pets/delete/delete.dialog.component";
 import { DataSource } from "@angular/cdk/collections";
-import { DataService } from "../../services/data.service";
 import { Animal } from "../../models/animal";
 
 import { BehaviorSubject, merge, Observable } from "rxjs";
 import { map } from "rxjs/operators";
+import { DialogDataService } from "../../services/dialog.data.service";
+import { WildAnimalService } from "../../services/wild-animal.service";
+import { PetService } from "../../services/pet.service";
 
 @Component({
   selector: 'app-animals-list',
@@ -18,18 +20,23 @@ import { map } from "rxjs/operators";
 })
 export class AnimalsListComponent implements OnInit {
   @Input()
-  displayedColumns: string[] = [];
+  declare displayedColumns: string[];
+  @Input()
+  declare type: string;
 
-  declare database: DataService;
+  declare animalService: any;
   declare dataSource: AnimalDataSource;
   declare index: number;
   declare id: number;
 
-  constructor(public httpClient: HttpClient,
-              public dialog: MatDialog,
-              public dataService: DataService) {}
+  constructor(public dialog: MatDialog,
+              public dialogDataService: DialogDataService,
+              public wildService: WildAnimalService,
+              public petService: PetService) {
+  }
 
   ngOnInit() {
+    this.animalService = (this.type === 'pet' ? this.petService : this.wildService);
     this.loadData();
   }
 
@@ -38,18 +45,17 @@ export class AnimalsListComponent implements OnInit {
   }
 
   public loadData() {
-    this.database = new DataService(this.httpClient);
-    this.dataSource = new AnimalDataSource(this.database);
+    this.dataSource = new AnimalDataSource(this.animalService);
   }
 
   addNew() {
-    const dialogRef = this.dialog.open(AddDialogComponent, {
-      data: {issue: Animal }
+    const dialogRef = this.dialog.open(AddPetDialogComponent, {
+      data: {issue: Animal}
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === 1) {
-        this.database.dataChange.value.push(this.dataService.getDialogData());
+        this.animalService.dataChange.value.push(this.dialogDataService.getDialogData());
         this.refreshTable();
       }
     });
@@ -58,16 +64,16 @@ export class AnimalsListComponent implements OnInit {
   startEdit(i: number, id: number, title: string, state: string, url: string, created_at: string, updated_at: string) {
     this.id = id;
     this.index = i;
-    const dialogRef = this.dialog.open(EditDialogComponent, {
+    const dialogRef = this.dialog.open(EditPetDialogComponent, {
       data: {id: id, title: title, state: state, url: url, created_at: created_at, updated_at: updated_at}
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === 1) {
         // When using an edit things are little different, firstly we find record inside DataService by id
-        const foundIndex = this.database.dataChange.value.findIndex(x => x.id === this.id);
+        const foundIndex = this.animalService.dataChange.value.findIndex((x: any) => x.id === this.id);
         // Then you update that record using data from dialogData (values you enetered)
-        this.database.dataChange.value[foundIndex] = this.dataService.getDialogData();
+        this.animalService.dataChange.value[foundIndex] = this.dialogDataService.getDialogData();
         // And lastly refresh table
         this.refreshTable();
       }
@@ -77,15 +83,15 @@ export class AnimalsListComponent implements OnInit {
   deleteItem(i: number, id: number, title: string, state: string, url: string) {
     this.index = i;
     this.id = id;
-    const dialogRef = this.dialog.open(DeleteDialogComponent, {
+    const dialogRef = this.dialog.open(DeletePetDialogComponent, {
       data: {id: id, title: title}
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === 1) {
-        const foundIndex = this.database.dataChange.value.findIndex(x => x.id === this.id);
+        const foundIndex = this.animalService.dataChange.value.findIndex((x: any) => x.id === this.id);
         // for delete we use splice in order to remove single object from DataService
-        this.database.dataChange.value.splice(foundIndex, 1);
+        this.animalService.dataChange.value.splice(foundIndex, 1);
         this.refreshTable();
       }
     });
@@ -111,7 +117,7 @@ export class AnimalDataSource extends DataSource<Animal> {
   filteredData: Animal[] = [];
   renderedData: Animal[] = [];
 
-  constructor(public dataService: DataService) {
+  constructor(public dataService: any) {
     super();
   }
 
@@ -125,7 +131,7 @@ export class AnimalDataSource extends DataSource<Animal> {
     this.dataService.getAllAnimals();
 
 
-    return merge(...displayDataChanges).pipe(map( () => {
+    return merge(...displayDataChanges).pipe(map(() => {
         // Filter data
         this.filteredData = this.dataService.data.slice().filter((animal: Animal) => {
           const searchStr = (String(animal.id) + animal.title + animal.created_at).toLowerCase();
@@ -138,5 +144,6 @@ export class AnimalDataSource extends DataSource<Animal> {
     ));
   }
 
-  disconnect() {}
+  disconnect() {
+  }
 }

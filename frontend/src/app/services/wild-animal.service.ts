@@ -6,7 +6,7 @@ import { AbstractHttpService } from "./abstract.http.service";
 import { DialogDataService } from "./dialog.data.service";
 
 @Injectable()
-export class DataService extends AbstractHttpService<Animal> {
+export class WildAnimalService extends AbstractHttpService<Animal> {
   dataChange: BehaviorSubject<Animal[]> = new BehaviorSubject<Animal[]>([]);
 
   constructor (private httpClient: HttpClient, private dialogDataService: DialogDataService) {
