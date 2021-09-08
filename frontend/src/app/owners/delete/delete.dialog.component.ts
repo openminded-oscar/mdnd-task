@@ -1,15 +1,15 @@
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import {Component, Inject} from '@angular/core';
-import { PetService } from "../../pet.service";
+import { PetService } from "../../animals/pet.service";
 
 @Component({
   selector: 'app-delete.dialog',
   templateUrl: './delete.dialog.html',
   styleUrls: ['./delete.dialog.css']
 })
-export class DeletePetDialogComponent {
+export class DeleteOwnerDialogComponent {
 
-  constructor(public dialogRef: MatDialogRef<DeletePetDialogComponent>,
+  constructor(public dialogRef: MatDialogRef<DeleteOwnerDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
               public dataService: PetService
   ) { }

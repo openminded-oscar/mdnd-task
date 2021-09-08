@@ -2,8 +2,8 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import {Component, Inject} from '@angular/core';
 
 import {FormControl, Validators} from '@angular/forms';
-import {Animal} from '../../../models/animal';
-import { WildAnimalService } from "../../../services/wild-animal.service";
+import {Animal} from '../../../common/models/animal';
+import { WildAnimalService } from "../../wild-animal.service";
 
 @Component({
   selector: 'app-add.dialog',

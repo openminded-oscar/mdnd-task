@@ -1,6 +1,6 @@
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import {Component, Inject} from '@angular/core';
-import { WildAnimalService } from "../../../services/wild-animal.service";
+import { WildAnimalService } from "../../wild-animal.service";
 
 @Component({
   selector: 'app-delete.dialog',

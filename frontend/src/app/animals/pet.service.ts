@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Animal } from '../models/animal';
+import { Animal } from '../common/models/animal';
 import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
-import { AbstractHttpService } from "./abstract.http.service";
-import { DialogDataService } from "./dialog.data.service";
+import { AbstractHttpService } from "../common/services/abstract.http.service";
+import { DialogDataService } from "../common/services/dialog.data.service";
 
 @Injectable()
 export class PetService extends AbstractHttpService<Animal> {

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { PetService } from "./services/pet.service";
-import { WildAnimalService } from "./services/wild-animal.service";
+import { PetService } from "./animals/pet.service";
+import { WildAnimalService } from "./animals/wild-animal.service";
 
 @Component({
   selector: 'app-root',

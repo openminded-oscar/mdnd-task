@@ -1,16 +1,16 @@
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import {Component, Inject} from '@angular/core';
 import { FormControl, NgForm, Validators } from '@angular/forms';
-import { PetService } from "../../pet.service";
+import { PetService } from "../../animals/pet.service";
 
 @Component({
   selector: 'app-edit.dialog',
   templateUrl: './edit.dialog.html',
   styleUrls: ['./edit.dialog.css']
 })
-export class EditPetDialogComponent {
+export class EditOwnerDialogComponent {
 
-  constructor(public dialogRef: MatDialogRef<EditPetDialogComponent>,
+  constructor(public dialogRef: MatDialogRef<EditOwnerDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
               public dataService: PetService
   ) { }

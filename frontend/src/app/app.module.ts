@@ -20,12 +20,16 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { MatCardModule } from "@angular/material/card";
-import { PetService } from "./services/pet.service";
-import { DialogDataService } from "./services/dialog.data.service";
-import { WildAnimalService } from "./services/wild-animal.service";
+import { PetService } from "./animals/pet.service";
+import { DialogDataService } from "./common/services/dialog.data.service";
+import { WildAnimalService } from "./animals/wild-animal.service";
 import { AddWildAnimalDialogComponent } from "./animals/wild-animal/add/add.dialog.component";
 import { EditWildAnimalDialogComponent } from "./animals/wild-animal/edit/edit.dialog.component";
 import { DeleteWildAnimalDialogComponent } from "./animals/wild-animal/delete/delete.dialog.component";
+import { AddOwnerDialogComponent } from "./owners/add/add.dialog.component";
+import { EditOwnerDialogComponent } from "./owners/edit/edit.dialog.component";
+import { DeleteOwnerDialogComponent } from "./owners/delete/delete.dialog.component";
+import { OwnerService } from "./owners/owner.service";
 
 @NgModule({
   declarations: [
@@ -38,7 +42,11 @@ import { DeleteWildAnimalDialogComponent } from "./animals/wild-animal/delete/de
 
     AddWildAnimalDialogComponent,
     EditWildAnimalDialogComponent,
-    DeleteWildAnimalDialogComponent
+    DeleteWildAnimalDialogComponent,
+
+    AddOwnerDialogComponent,
+    EditOwnerDialogComponent,
+    DeleteOwnerDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +65,7 @@ import { DeleteWildAnimalDialogComponent } from "./animals/wild-animal/delete/de
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [WildAnimalService, PetService, DialogDataService],
+  providers: [WildAnimalService, PetService, OwnerService, DialogDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

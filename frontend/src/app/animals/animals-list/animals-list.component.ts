@@ -5,13 +5,13 @@ import { AddPetDialogComponent } from "../pets/add/add.dialog.component";
 import { EditPetDialogComponent } from "../pets/edit/edit.dialog.component";
 import { DeletePetDialogComponent } from "../pets/delete/delete.dialog.component";
 import { DataSource } from "@angular/cdk/collections";
-import { Animal } from "../../models/animal";
+import { Animal } from "../../common/models/animal";
 
 import { BehaviorSubject, merge, Observable } from "rxjs";
 import { map } from "rxjs/operators";
-import { DialogDataService } from "../../services/dialog.data.service";
-import { WildAnimalService } from "../../services/wild-animal.service";
-import { PetService } from "../../services/pet.service";
+import { DialogDataService } from "../../common/services/dialog.data.service";
+import { WildAnimalService } from "../wild-animal.service";
+import { PetService } from "../pet.service";
 
 @Component({
   selector: 'app-animals-list',
