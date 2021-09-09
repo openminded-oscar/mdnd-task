@@ -1,4 +1,9 @@
 <div class="owner">
+  <div class="owner--search">
+    <mat-form-field [style.width.px]=200>
+      <input matInput type="text" name="search-owner" placeholder="Search owner input TODO">
+    </mat-form-field>
+  </div>
   <div class="owner--add">
     <button mat-button mat-raised-button (click)="addOwner()">
       Add new owner

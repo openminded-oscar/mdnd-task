@@ -1,4 +1,9 @@
 <div class="species">
+  <div class="species--search">
+    <mat-form-field [style.width.px]=200>
+      <input matInput type="text" name="search-species" placeholder="Search species input TODO">
+    </mat-form-field>
+  </div>
   <div class="species--add">
     <button mat-button mat-raised-button (click)="addSpecies()">
       Add new species
