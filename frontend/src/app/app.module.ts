@@ -5,9 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AnimalsListComponent } from './animals/animals-list/animals-list.component';
-import { EditPetDialogComponent } from "./animals/pet/edit/edit.dialog.component";
 import { DeletePetDialogComponent } from "./animals/pet/delete/delete.dialog.component";
-import { AddPetDialogComponent } from "./animals/pet/add/add.dialog.component";
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -23,7 +21,6 @@ import { MatCardModule } from "@angular/material/card";
 import { PetService } from "./animals/pet.service";
 import { DialogDataService } from "./common/services/dialog.data.service";
 import { WildAnimalService } from "./animals/wild-animal.service";
-import { AddWildAnimalDialogComponent } from "./animals/wild-animal/add/add.dialog.component";
 import { EditWildAnimalDialogComponent } from "./animals/wild-animal/edit/edit.dialog.component";
 import { DeleteWildAnimalDialogComponent } from "./animals/wild-animal/delete/delete.dialog.component";
 import { AddOwnerDialogComponent } from "./owners/add/add.dialog.component";
@@ -32,17 +29,21 @@ import { DeleteOwnerDialogComponent } from "./owners/delete/delete.dialog.compon
 import { OwnerService } from "./owners/owner.service";
 import { AnimalManagerComponent } from './animals/animal-manager/animal-manager.component';
 import { RouterModule } from "@angular/router";
+import { CommonModule } from "@angular/common";
+import { AddPetComponent } from "./animals/pet/add/add-pet.component";
+import { EditPetDialogComponent } from "./animals/pet/edit/edit-pet.component";
+import { AddWildAnimalComponent } from "./animals/wild-animal/add/add-wild-animal.component";
 
 @NgModule({
   declarations: [
     AppComponent,
 
     AnimalsListComponent,
-    AddPetDialogComponent,
+    AddPetComponent,
     EditPetDialogComponent,
     DeletePetDialogComponent,
 
-    AddWildAnimalDialogComponent,
+    AddWildAnimalComponent,
     EditWildAnimalDialogComponent,
     DeleteWildAnimalDialogComponent,
 
@@ -52,6 +53,7 @@ import { RouterModule } from "@angular/router";
     AnimalManagerComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
     RouterModule,

@@ -1,17 +1,17 @@
 import {Component} from '@angular/core';
 
 import {FormControl, Validators} from '@angular/forms';
-import { PetService } from "../../pet.service";
+import { WildAnimalService } from "../../wild-animal.service";
 import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-add.dialog',
-  templateUrl: './add.dialog.html',
-  styleUrls: ['./add.dialog.css']
+  templateUrl: './add-wild.html',
+  styleUrls: ['./add-wild.css']
 })
 
-export class AddPetDialogComponent {
-  constructor(public dataService: PetService, private router: Router) { }
+export class AddWildAnimalComponent {
+  constructor(private dataService: WildAnimalService, private router: Router) { }
 
   formControl = new FormControl('', [
     Validators.required

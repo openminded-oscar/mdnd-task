@@ -1,9 +1,10 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject} from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import {Animal} from '../common/models/animal';
 import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { AbstractHttpService } from "../common/services/abstract.http.service";
 import { DialogDataService } from "../common/services/dialog.data.service";
+import { map } from "rxjs/operators";
 
 @Injectable()
 export class WildAnimalService extends AbstractHttpService<Animal> {
@@ -24,6 +25,11 @@ export class WildAnimalService extends AbstractHttpService<Animal> {
       (error: HttpErrorResponse) => {
         console.log(error.name + ' ' + error.message);
       });
+  }
+
+  getAnimalById(id: any): Observable<Animal|null> {
+    return this.findById(id)
+      .pipe(map((data: HttpResponse<Animal>) => data.body));
   }
 
   addItem(animal: Animal): void {

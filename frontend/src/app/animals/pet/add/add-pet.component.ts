@@ -1,19 +1,24 @@
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import {Component, Inject} from '@angular/core';
+import {Component} from '@angular/core';
 
 import {FormControl, Validators} from '@angular/forms';
-import {Animal} from '../../../common/models/animal';
-import { WildAnimalService } from "../../wild-animal.service";
+import { PetService } from "../../pet.service";
 import { Router } from "@angular/router";
+import { Pet } from "../../../common/models/animal";
 
 @Component({
   selector: 'app-add.dialog',
-  templateUrl: './add.dialog.html',
-  styleUrls: ['./add.dialog.css']
+  templateUrl: './add-pet.html',
+  styleUrls: ['./add-pet.css']
 })
 
-export class AddWildAnimalDialogComponent {
-  constructor(private dataService: WildAnimalService, private router: Router) { }
+export class AddPetComponent {
+  pet: Pet = {
+    title: '',
+    vaccinated: false,
+    birthday: new Date()
+  }
+
+  constructor(public dataService: PetService, private router: Router) { }
 
   formControl = new FormControl('', [
     Validators.required

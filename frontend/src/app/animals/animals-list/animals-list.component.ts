@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from "@angular/material/dialog";
-import { EditPetDialogComponent } from "../pet/edit/edit.dialog.component";
 import { DeletePetDialogComponent } from "../pet/delete/delete.dialog.component";
 import { DataSource } from "@angular/cdk/collections";
 import { Animal } from "../../common/models/animal";
