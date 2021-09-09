@@ -1,7 +1,14 @@
 <div class="container">
   <h3 mat-dialog-title>Adding new animal Species</h3>
   <div mat-dialog-content>
-
+    <form [formGroup]="speciesForm" (ngSubmit)="save">
+      <div class="form">
+        <mat-form-field appearance="fill">
+          <mat-label>Species label</mat-label>
+          <input formControlName="label" matInput>
+        </mat-form-field>
+      </div>
+    </form>
   </div>
 
   <div mat-dialog-actions>

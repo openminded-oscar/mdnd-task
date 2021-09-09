@@ -23,7 +23,7 @@
 
     <ng-container matColumnDef="birthday">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Birthday</mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.birthday}}</mat-cell>
+      <mat-cell *matCellDef="let row"> {{row.birthday|date:'shortDate'}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="vaccinated">
@@ -36,6 +36,11 @@
       <mat-cell *matCellDef="let row"> {{row.speciesId}}</mat-cell>
     </ng-container>
 
+    <ng-container matColumnDef="ownerId">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Owner Id</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.ownerId}}</mat-cell>
+    </ng-container>
+
     <ng-container matColumnDef="trackingId">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Tracking Id</mat-header-cell>
       <mat-cell *matCellDef="let row"> {{row.trackingId}}</mat-cell>
@@ -44,8 +49,8 @@
     <!-- actions -->
     <ng-container matColumnDef="actions">
       <mat-header-cell *matHeaderCellDef>
-        <button mat-icon-button color="primary" (click)="addNew()">
-          <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+        <button mat-raised-button color="primary" (click)="addNew()">
+          Add
         </button>
       </mat-header-cell>
 

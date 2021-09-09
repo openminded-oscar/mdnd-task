@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AnimalManagerComponent implements OnInit {
   wildAnimalsDisplayedColumns = ['id', 'birthday', 'vaccinated', 'speciesId', 'trackingId', 'actions'];
-  petsDisplayedColumns = ['id', 'birthday', 'vaccinated', 'actions'];
+  petsDisplayedColumns = ['id', 'birthday', 'vaccinated', 'speciesId', 'ownerId', 'actions'];
 
   constructor() { }
 

@@ -1,9 +1,9 @@
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import {Component, Inject} from '@angular/core';
 
-import {FormControl, Validators} from '@angular/forms';
-import {Animal} from '../../common/models/animal';
-import { PetService } from "../../animals/pet.service";
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { SpeciesService } from "../../animals/species.service";
+import { Owner } from "../../common/models/owner";
 
 @Component({
   selector: 'app-add.dialog',
@@ -12,31 +12,32 @@ import { PetService } from "../../animals/pet.service";
 })
 
 export class AddOwnerDialogComponent {
-  constructor(public dialogRef: MatDialogRef<AddOwnerDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: Animal,
-              public dataService: PetService
-  ) { }
+  ownerInitial: Owner = {
+    fullName: undefined
+  };
 
-  formControl = new FormControl('', [
-    Validators.required
-    // Validators.email,
-  ]);
+  declare ownerForm: FormGroup;
 
-  getErrorMessage() {
-    return this.formControl.hasError('required') ? 'Required field' :
-      this.formControl.hasError('email') ? 'Not a valid email' :
-        '';
+  constructor(private dialogRef: MatDialogRef<AddOwnerDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) private data: any,
+              private formBuilder: FormBuilder,
+              private speciesService: SpeciesService) {
   }
 
-  submit() {
-  // empty stuff
+  ngOnInit(): void {
+    this.ownerForm = this.formBuilder.group({
+      label: [this.ownerInitial.fullName, [Validators.required]]
+    });
+  }
+
+  save() {
+    this.speciesService.addItem(this.ownerForm.value)
+      .subscribe(res => {
+        this.dialogRef.close(res);
+      });
   }
 
   onNoClick(): void {
     this.dialogRef.close();
-  }
-
-  public confirmAdd(): void {
-    this.dataService.addItem(this.data);
   }
 }

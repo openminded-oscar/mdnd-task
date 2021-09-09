@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AddOwnerDialogComponent } from "../../../owners/add/add.dialog.component";
 import { MatDialog } from "@angular/material/dialog";
 
@@ -7,21 +7,19 @@ import { MatDialog } from "@angular/material/dialog";
   templateUrl: './input-owner.component.html',
   styleUrls: ['./input-owner.component.scss']
 })
-export class InputOwnerComponent implements OnInit {
-  constructor(private dialog: MatDialog) { }
+export class InputOwnerComponent {
+  @Output() ownerSelected = new EventEmitter<number>();
 
-  ngOnInit(): void {
-  }
+  constructor(private dialog: MatDialog) { }
 
   addOwner() {
     let dialogRef = this.dialog.open(AddOwnerDialogComponent);
 
-    // dialogRef.afterClosed().subscribe(result => {
-    //   if (result === 1) {
-    //     const foundIndex = this.animalService.dataChange.value.findIndex((x: any) => x.id === this.id);
-    //     this.animalService.dataChange.value.splice(foundIndex, 1);
-    //     this.refresh();
-    //   }
-    // });
+    dialogRef.afterClosed().subscribe(result => {
+      const id = result.id;
+      if (id) {
+        this.ownerSelected.emit(id);
+      }
+    });
   }
 }

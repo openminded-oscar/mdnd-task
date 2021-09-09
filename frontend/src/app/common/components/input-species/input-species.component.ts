@@ -7,13 +7,10 @@ import { MatDialog } from "@angular/material/dialog";
   templateUrl: './input-species.component.html',
   styleUrls: ['./input-species.component.scss']
 })
-export class InputSpeciesComponent implements OnInit {
-  @Output() speciesSelected = new EventEmitter<string>();
+export class InputSpeciesComponent {
+  @Output() speciesSelected = new EventEmitter<number>();
 
   constructor(private dialog: MatDialog) {
-  }
-
-  ngOnInit(): void {
   }
 
   addSpecies() {

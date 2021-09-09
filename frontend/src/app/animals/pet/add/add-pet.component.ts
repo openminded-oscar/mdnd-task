@@ -18,15 +18,15 @@ import { AddOwnerDialogComponent } from "../../../owners/add/add.dialog.componen
 export class AddPetComponent implements OnInit {
   petInitial: Pet = {
     vaccinated: false,
-    birthday: new Date(),
-    speciesId: undefined
+    birthday: new Date()
   }
-  declare petForm: FormGroup
+  declare petForm: FormGroup;
+  declare speciesId: number;
+  declare ownerId: number;
 
   constructor(public dataService: PetService,
               private router: Router,
-              private formBuilder: FormBuilder,
-              private dialog: MatDialog) {
+              private formBuilder: FormBuilder) {
   }
 
   ngOnInit(): void {
@@ -37,7 +37,11 @@ export class AddPetComponent implements OnInit {
   }
 
   submit() {
-    this.dataService.addItem(this.petForm.value)
+    const pet = this.petForm.value;
+    pet.speciesId = this.speciesId;
+    pet.ownerId = this.ownerId;
+
+    this.dataService.addItem(pet)
       .subscribe(result => {
         alert('added item');
       });
@@ -45,8 +49,11 @@ export class AddPetComponent implements OnInit {
       .then();
   }
 
-  speciesSelected($event: string) {
-    // TODO fix
-    console.log('species selected');
+  speciesSelected(speciesId: number) {
+    this.speciesId = speciesId;
+  }
+
+  ownerSelected(ownerId: number) {
+    this.ownerId = ownerId;
   }
 }

@@ -10,7 +10,7 @@
 
   <form [formGroup]="petForm" (ngSubmit)="submit">
     <app-input-species (speciesSelected)="speciesSelected($event)"></app-input-species>
-    <app-input-owner></app-input-owner>
+    <app-input-owner (ownerSelected)="ownerSelected($event)"></app-input-owner>
 
     <div class="form">
       <mat-checkbox formControlName="vaccinated">Vaccinated</mat-checkbox>
@@ -24,6 +24,5 @@
         <mat-datepicker #birthday></mat-datepicker>
       </mat-form-field>
     </div>
-
   </form>
 </div>
