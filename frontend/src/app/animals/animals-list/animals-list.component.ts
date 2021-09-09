@@ -1,7 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
 import { MatDialog } from "@angular/material/dialog";
-import { AddPetDialogComponent } from "../pet/add/add.dialog.component";
 import { EditPetDialogComponent } from "../pet/edit/edit.dialog.component";
 import { DeletePetDialogComponent } from "../pet/delete/delete.dialog.component";
 import { DataSource } from "@angular/cdk/collections";
@@ -12,6 +10,8 @@ import { map } from "rxjs/operators";
 import { DialogDataService } from "../../common/services/dialog.data.service";
 import { WildAnimalService } from "../wild-animal.service";
 import { PetService } from "../pet.service";
+import { DeleteWildAnimalDialogComponent } from "../wild-animal/delete/delete.dialog.component";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-animals-list',
@@ -29,10 +29,11 @@ export class AnimalsListComponent implements OnInit {
   declare index: number;
   declare id: number;
 
-  constructor(public dialog: MatDialog,
-              public dialogDataService: DialogDataService,
-              public wildService: WildAnimalService,
-              public petService: PetService) {
+  constructor(private dialog: MatDialog,
+              private dialogDataService: DialogDataService,
+              private router: Router,
+              private wildService: WildAnimalService,
+              private petService: PetService) {
   }
 
   ngOnInit() {
@@ -49,57 +50,33 @@ export class AnimalsListComponent implements OnInit {
   }
 
   addNew() {
-    const dialogRef = this.dialog.open(AddPetDialogComponent, {
-      data: {issue: Animal}
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result === 1) {
-        this.animalService.dataChange.value.push(this.dialogDataService.getDialogData());
-        this.refreshTable();
-      }
-    });
+    const pathForNew = this.type === 'pet' ? 'pet/new' : 'wild/new';
+    this.router.navigate([pathForNew])
+      .then();
   }
 
-  startEdit(i: number, id: number, title: string, state: string, url: string, created_at: string, updated_at: string) {
-    this.id = id;
-    this.index = i;
-    const dialogRef = this.dialog.open(EditPetDialogComponent, {
-      data: {id: id, title: title, state: state, url: url, created_at: created_at, updated_at: updated_at}
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result === 1) {
-        // When using an edit things are little different, firstly we find record inside DataService by id
-        const foundIndex = this.animalService.dataChange.value.findIndex((x: any) => x.id === this.id);
-        // Then you update that record using data from dialogData (values you enetered)
-        this.animalService.dataChange.value[foundIndex] = this.dialogDataService.getDialogData();
-        // And lastly refresh table
-        this.refreshTable();
-      }
-    });
-  }
-
-  deleteItem(i: number, id: number, title: string, state: string, url: string) {
+  deleteItem(i: number, id: number) {
     this.index = i;
     this.id = id;
-    const dialogRef = this.dialog.open(DeletePetDialogComponent, {
-      data: {id: id, title: title}
-    });
+
+    let dialogRef;
+    if(this.type === 'pet') {
+      dialogRef = this.dialog.open(DeletePetDialogComponent, {
+        data: {id: id}
+      });
+    } else {
+      dialogRef = this.dialog.open(DeleteWildAnimalDialogComponent, {
+        data: {id: id}
+      });
+    }
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === 1) {
         const foundIndex = this.animalService.dataChange.value.findIndex((x: any) => x.id === this.id);
-        // for delete we use splice in order to remove single object from DataService
         this.animalService.dataChange.value.splice(foundIndex, 1);
-        this.refreshTable();
+        this.refresh();
       }
     });
-  }
-
-
-  private refreshTable() {
-    // implement
   }
 }
 

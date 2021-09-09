@@ -8,7 +8,6 @@ import { PetService } from "../../pet.service";
   styleUrls: ['./delete.dialog.css']
 })
 export class DeletePetDialogComponent {
-
   constructor(public dialogRef: MatDialogRef<DeletePetDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
               public dataService: PetService
