@@ -4,6 +4,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PetService } from "../../pet.service";
 import { Router } from "@angular/router";
 import { Pet } from "../../../common/models/animal";
+import { MatDialog } from "@angular/material/dialog";
+import { DeletePetDialogComponent } from "../delete/delete.dialog.component";
+import { DeleteWildAnimalDialogComponent } from "../../wild-animal/delete/delete.dialog.component";
+import { AddSpeciesComponent } from "../../species/add/add-species.component";
+import { AddOwnerDialogComponent } from "../../../owners/add/add.dialog.component";
 
 @Component({
   selector: 'app-add.dialog',
@@ -13,11 +18,15 @@ import { Pet } from "../../../common/models/animal";
 export class AddPetComponent implements OnInit {
   petInitial: Pet = {
     vaccinated: false,
-    birthday: new Date()
+    birthday: new Date(),
+    speciesId: undefined
   }
   declare petForm: FormGroup
 
-  constructor(public dataService: PetService, private router: Router, private formBuilder: FormBuilder) {
+  constructor(public dataService: PetService,
+              private router: Router,
+              private formBuilder: FormBuilder,
+              private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -34,5 +43,10 @@ export class AddPetComponent implements OnInit {
       });
     this.router.navigate(['main'])
       .then();
+  }
+
+  speciesSelected($event: string) {
+    // TODO fix
+    console.log('species selected');
   }
 }

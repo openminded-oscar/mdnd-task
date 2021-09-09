@@ -2,15 +2,17 @@
   <div class="header-row">
     <h3 class="title" mat-dialog-title>Add new Wild Animal</h3>
     <div class="actions">
-      <button color="accent" mat-button md-raised-button type="submit" [disabled]="!wildAnimalForm.valid"
+      <button color="accent" mat-button mat-raised-button type="submit" [disabled]="!wildAnimalForm.valid"
               (click)="submit()">
         Save
       </button>
-      <!--          <button mat-button (click)="onNoClick()" tabindex="-1">Cancel</button>-->
     </div>
   </div>
 
+
   <form [formGroup]="wildAnimalForm" (ngSubmit)="submit">
+    <app-input-species (speciesSelected)="speciesSelected($event)"></app-input-species>
+
     <div class="form">
       <mat-form-field color="accent">
         <input matInput placeholder="tracking id" formControlName="trackingId" name="trackingId">

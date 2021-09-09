@@ -36,6 +36,10 @@ import { AddWildAnimalComponent } from "./animals/wild-animal/add/add-wild-anima
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatNativeDateModule } from "@angular/material/core";
+import { AddSpeciesComponent } from './animals/species/add/add-species.component';
+import { InputSpeciesComponent } from './common/components/input-species/input-species.component';
+import { InputOwnerComponent } from './common/components/input-owner/input-owner.component';
+import { SpeciesService } from "./animals/species.service";
 
 @NgModule({
   declarations: [
@@ -53,7 +57,10 @@ import { MatNativeDateModule } from "@angular/material/core";
     AddOwnerDialogComponent,
     EditOwnerDialogComponent,
     DeleteOwnerDialogComponent,
-    AnimalManagerComponent
+    AnimalManagerComponent,
+    AddSpeciesComponent,
+    InputSpeciesComponent,
+    InputOwnerComponent
   ],
   imports: [
     CommonModule,
@@ -77,7 +84,7 @@ import { MatNativeDateModule } from "@angular/material/core";
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [WildAnimalService, PetService, OwnerService, DialogDataService],
+  providers: [WildAnimalService, PetService, OwnerService, SpeciesService, DialogDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

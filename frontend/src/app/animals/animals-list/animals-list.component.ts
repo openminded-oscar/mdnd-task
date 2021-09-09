@@ -6,7 +6,6 @@ import { Animal } from "../../common/models/animal";
 
 import { BehaviorSubject, merge, Observable } from "rxjs";
 import { map } from "rxjs/operators";
-import { DialogDataService } from "../../common/services/dialog.data.service";
 import { WildAnimalService } from "../wild-animal.service";
 import { PetService } from "../pet.service";
 import { DeleteWildAnimalDialogComponent } from "../wild-animal/delete/delete.dialog.component";
@@ -29,7 +28,6 @@ export class AnimalsListComponent implements OnInit {
   declare id: number;
 
   constructor(private dialog: MatDialog,
-              private dialogDataService: DialogDataService,
               private router: Router,
               private wildService: WildAnimalService,
               private petService: PetService) {

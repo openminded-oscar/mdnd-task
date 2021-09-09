@@ -5,22 +5,27 @@ import { WildAnimalService } from "../../wild-animal.service";
 import { Router } from "@angular/router";
 import { Pet, WildAnimal } from "../../../common/models/animal";
 import { PetService } from "../../pet.service";
+import { MatDialog } from "@angular/material/dialog";
+import { DeletePetDialogComponent } from "../../pet/delete/delete.dialog.component";
+import { AddSpeciesComponent } from "../../species/add/add-species.component";
 
 @Component({
   selector: 'app-add.dialog',
   templateUrl: './add-wild.html',
   styleUrls: ['./add-wild.scss']
 })
-
 export class AddWildAnimalComponent {
   petInitial: WildAnimal = {
     vaccinated: false,
     birthday: new Date(),
-    trackingId: undefined
+    trackingId: undefined,
+    speciesId: undefined
   }
   declare wildAnimalForm: FormGroup
 
-  constructor(public dataService: WildAnimalService, private router: Router, private formBuilder: FormBuilder) {
+  constructor(public dataService: WildAnimalService,
+              private router: Router,
+              private formBuilder: FormBuilder) {
   }
 
   ngOnInit(): void {
@@ -38,5 +43,10 @@ export class AddWildAnimalComponent {
       });
     this.router.navigate(['main'])
       .then();
+  }
+
+  speciesSelected($event: string) {
+    // TODO fix
+    console.log('species selected');
   }
 }
