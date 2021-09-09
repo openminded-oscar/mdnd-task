@@ -17,3 +17,11 @@
   font-size: 16px;
   flex-grow: 1;
 }
+
+.header-row {
+  display: flex;
+
+  .actions {
+    margin-left: auto;
+  }
+}

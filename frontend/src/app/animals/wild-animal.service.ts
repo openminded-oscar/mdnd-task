@@ -32,25 +32,14 @@ export class WildAnimalService extends AbstractHttpService<Animal> {
       .pipe(map((data: HttpResponse<Animal>) => data.body));
   }
 
-  addItem(animal: Animal): void {
-    this.save(animal).subscribe(data => {
-        this.dialogDataService.dialogData = data.body;
-        alert('Successfully added');
-      },
-      (err: HttpErrorResponse) => {
-        alert('Error occurred. Details: ' + err.name + ' ' + err.message);
-      });
+  addItem(animal: Animal): Observable<Animal|null> {
+    return this.save(animal)
+      .pipe(map((data: HttpResponse<Animal>) => data.body));
   }
 
-  updateItem(animal: Animal): void {
-    this.update(animal).subscribe(data => {
-        this.dialogDataService.dialogData = data.body;
-        alert('Successfully edited');
-      },
-      (err: HttpErrorResponse) => {
-        alert('Error occurred. Details: ' + err.name + ' ' + err.message);
-      }
-    );
+  updateItem(animal: Animal): Observable<Animal|null>  {
+    return this.update(animal)
+      .pipe(map((data: HttpResponse<Animal>) => data.body));
   }
 
   deleteItem(id: string): void {

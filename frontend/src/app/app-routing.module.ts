@@ -9,10 +9,10 @@ import { AddWildAnimalComponent } from "./animals/wild-animal/add/add-wild-anima
 const routes: Routes = [
   {path: '', redirectTo: '/main', pathMatch: 'full'},
   {path: 'main', component: AnimalManagerComponent},
-  {path: 'pet/:id', component: EditPetDialogComponent},
-  {path: 'wild/:id', component: EditWildAnimalDialogComponent},
   {path: 'pet/new', component: AddPetComponent},
   {path: 'wild/new', component: AddWildAnimalComponent},
+  {path: 'pet/:id', component: EditPetDialogComponent},
+  {path: 'wild/:id', component: EditWildAnimalDialogComponent},
 ];
 
 @NgModule({

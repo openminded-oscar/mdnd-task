@@ -33,6 +33,9 @@ import { CommonModule } from "@angular/common";
 import { AddPetComponent } from "./animals/pet/add/add-pet.component";
 import { EditPetDialogComponent } from "./animals/pet/edit/edit-pet.component";
 import { AddWildAnimalComponent } from "./animals/wild-animal/add/add-wild-animal.component";
+import { MatCheckboxModule } from "@angular/material/checkbox";
+import { MatDatepickerModule } from "@angular/material/datepicker";
+import { MatNativeDateModule } from "@angular/material/core";
 
 @NgModule({
   declarations: [
@@ -60,6 +63,9 @@ import { AddWildAnimalComponent } from "./animals/wild-animal/add/add-wild-anima
     BrowserAnimationsModule,
     MatDialogModule,
     MatButtonModule,
+    MatCheckboxModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     MatInputModule,
     MatIconModule,
     MatSortModule,
