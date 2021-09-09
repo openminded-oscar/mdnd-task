@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { MatDialog } from "@angular/material/dialog";
-import { AddPetDialogComponent } from "../pets/add/add.dialog.component";
-import { EditPetDialogComponent } from "../pets/edit/edit.dialog.component";
-import { DeletePetDialogComponent } from "../pets/delete/delete.dialog.component";
+import { AddPetDialogComponent } from "../pet/add/add.dialog.component";
+import { EditPetDialogComponent } from "../pet/edit/edit.dialog.component";
+import { DeletePetDialogComponent } from "../pet/delete/delete.dialog.component";
 import { DataSource } from "@angular/cdk/collections";
 import { Animal } from "../../common/models/animal";
 

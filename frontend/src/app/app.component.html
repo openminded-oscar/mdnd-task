@@ -58,12 +58,9 @@
   }
 
   .content {
-    display: flex;
     margin: 82px auto 32px;
     padding: 0 16px;
     max-width: 960px;
-    flex-direction: column;
-    align-items: center;
   }
 
   svg.material-icons {
@@ -321,17 +318,7 @@
 </div>
 
 <div class="content" role="main">
-  <div class="lists-container">
-    <mat-card>
-      <app-animals-list [displayedColumns]=petsDisplayedColumns [type]="'pet'">
-      </app-animals-list>
-    </mat-card>
-
-    <mat-card>
-      <app-animals-list [displayedColumns]=wildAnimalsDisplayedColumns [type]="'wild'">
-      </app-animals-list>
-    </mat-card>
-  </div>
+  <router-outlet></router-outlet>
 
   <!-- Footer -->
   <footer>
@@ -345,4 +332,4 @@
   </svg>
 </div>
 
-<router-outlet></router-outlet>
+

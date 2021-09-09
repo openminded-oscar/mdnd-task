@@ -20,11 +20,12 @@
   </div>
 
   <mat-table #table [dataSource]="dataSource" matSort class="mat-cell">
-    ng update @angular/cli @angular/core
-    <!-- ID Column -->
     <ng-container matColumnDef="id">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{row.id}}</mat-cell>
+      <mat-cell *matCellDef="let row" [ngSwitch]="type">
+        <a [routerLink]="['/pet', row.id]" *ngSwitchCase="'pet'">{{row.id}}</a>
+        <a [routerLink]="['/wild', row.id]" *ngSwitchDefault>{{row.id}}</a>
+      </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="birthday">

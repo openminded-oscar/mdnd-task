@@ -4,6 +4,7 @@ import {Component, Inject} from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
 import {Animal} from '../../../common/models/animal';
 import { WildAnimalService } from "../../wild-animal.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-add.dialog',
@@ -12,10 +13,7 @@ import { WildAnimalService } from "../../wild-animal.service";
 })
 
 export class AddWildAnimalDialogComponent {
-  constructor(public dialogRef: MatDialogRef<AddWildAnimalDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: Animal,
-              public dataService: WildAnimalService
-  ) { }
+  constructor(private dataService: WildAnimalService, private router: Router) { }
 
   formControl = new FormControl('', [
     Validators.required
@@ -30,13 +28,5 @@ export class AddWildAnimalDialogComponent {
 
   submit() {
   // empty stuff
-  }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
-  public confirmAdd(): void {
-    this.dataService.addItem(this.data);
   }
 }

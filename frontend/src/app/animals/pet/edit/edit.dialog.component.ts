@@ -1,7 +1,7 @@
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import {Component, Inject} from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, NgForm, Validators } from '@angular/forms';
 import { PetService } from "../../pet.service";
+import { ActivatedRoute, ParamMap, Router } from "@angular/router";
 
 @Component({
   selector: 'app-edit.dialog',
@@ -9,11 +9,15 @@ import { PetService } from "../../pet.service";
   styleUrls: ['./edit.dialog.css']
 })
 export class EditPetDialogComponent {
+  declare currentId: number;
 
-  constructor(public dialogRef: MatDialogRef<EditPetDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any,
-              public dataService: PetService
-  ) { }
+  constructor(private dataService: PetService, private router: Router, private route: ActivatedRoute) {}
+
+  ngOnInit() {
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      this.currentId = Number(params.get('id'));
+    });
+  }
 
   formControl = new FormControl('', [
     Validators.required
@@ -27,13 +31,5 @@ export class EditPetDialogComponent {
 
   submit(form: NgForm) {
 
-  }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
-  stopEdit(): void {
-    this.dataService.updateItem(this.data);
   }
 }

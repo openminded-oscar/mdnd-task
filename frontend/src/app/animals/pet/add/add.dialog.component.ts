@@ -1,9 +1,8 @@
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import {Component, Inject} from '@angular/core';
+import {Component} from '@angular/core';
 
 import {FormControl, Validators} from '@angular/forms';
-import {Animal} from '../../../common/models/animal';
 import { PetService } from "../../pet.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-add.dialog',
@@ -12,10 +11,7 @@ import { PetService } from "../../pet.service";
 })
 
 export class AddPetDialogComponent {
-  constructor(public dialogRef: MatDialogRef<AddPetDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: Animal,
-              public dataService: PetService
-  ) { }
+  constructor(public dataService: PetService, private router: Router) { }
 
   formControl = new FormControl('', [
     Validators.required
@@ -30,13 +26,5 @@ export class AddPetDialogComponent {
 
   submit() {
   // empty stuff
-  }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
-  public confirmAdd(): void {
-    this.dataService.addItem(this.data);
   }
 }

@@ -5,9 +5,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AnimalsListComponent } from './animals/animals-list/animals-list.component';
-import { EditPetDialogComponent } from "./animals/pets/edit/edit.dialog.component";
-import { DeletePetDialogComponent } from "./animals/pets/delete/delete.dialog.component";
-import { AddPetDialogComponent } from "./animals/pets/add/add.dialog.component";
+import { EditPetDialogComponent } from "./animals/pet/edit/edit.dialog.component";
+import { DeletePetDialogComponent } from "./animals/pet/delete/delete.dialog.component";
+import { AddPetDialogComponent } from "./animals/pet/add/add.dialog.component";
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -30,6 +30,8 @@ import { AddOwnerDialogComponent } from "./owners/add/add.dialog.component";
 import { EditOwnerDialogComponent } from "./owners/edit/edit.dialog.component";
 import { DeleteOwnerDialogComponent } from "./owners/delete/delete.dialog.component";
 import { OwnerService } from "./owners/owner.service";
+import { AnimalManagerComponent } from './animals/animal-manager/animal-manager.component';
+import { RouterModule } from "@angular/router";
 
 @NgModule({
   declarations: [
@@ -46,11 +48,13 @@ import { OwnerService } from "./owners/owner.service";
 
     AddOwnerDialogComponent,
     EditOwnerDialogComponent,
-    DeleteOwnerDialogComponent
+    DeleteOwnerDialogComponent,
+    AnimalManagerComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    RouterModule,
     BrowserAnimationsModule,
     MatDialogModule,
     MatButtonModule,

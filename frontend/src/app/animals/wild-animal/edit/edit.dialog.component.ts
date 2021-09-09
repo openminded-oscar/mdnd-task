@@ -1,19 +1,24 @@
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import {Component, Inject} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, NgForm, Validators } from '@angular/forms';
 import { WildAnimalService } from "../../wild-animal.service";
+import { ActivatedRoute, ParamMap, Router } from "@angular/router";
 
 @Component({
   selector: 'app-edit.dialog',
   templateUrl: './edit.dialog.html',
   styleUrls: ['./edit.dialog.css']
 })
-export class EditWildAnimalDialogComponent {
+export class EditWildAnimalDialogComponent implements OnInit {
+  declare currentId: number;
 
-  constructor(public dialogRef: MatDialogRef<EditWildAnimalDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any,
-              public dataService: WildAnimalService
-  ) { }
+  constructor(private dataService: WildAnimalService, private router: Router, private route: ActivatedRoute) {
+  }
+
+  ngOnInit() {
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      this.currentId = Number(params.get('id'));
+    });
+  }
 
   formControl = new FormControl('', [
     Validators.required
@@ -27,13 +32,5 @@ export class EditWildAnimalDialogComponent {
 
   submit(form: NgForm) {
 
-  }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
-  stopEdit(): void {
-    this.dataService.updateItem(this.data);
   }
 }
