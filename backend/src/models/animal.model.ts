@@ -1,8 +1,9 @@
 import {Entity, model, property, belongsTo} from '@loopback/repository';
 import {Species} from './species.model';
+import { BaseEntity } from "./base-entity.model";
 
 @model()
-export class Animal extends Entity {
+export class Animal extends BaseEntity {
   @property({
     type: 'number',
     id: true,

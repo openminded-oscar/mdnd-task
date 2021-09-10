@@ -5,6 +5,7 @@ import {Animal} from '.';
 export class WildAnimal extends Animal {
   @property({
     type: 'string',
+    index: {unique: true}
   })
   trackingId?: string;
 
