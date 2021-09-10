@@ -38,10 +38,9 @@ export class AddWildAnimalComponent {
 
     this.dataService.addItem(wildAnimal)
       .subscribe(result => {
-        alert('added item');
+        this.router.navigate(['main'])
+          .then();
       });
-    this.router.navigate(['main'])
-      .then();
   }
 
   speciesSelected(speciesId: number) {

@@ -3,14 +3,13 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Pet } from '../common/models/animal';
 import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { AbstractHttpService } from "../common/services/abstract.http.service";
-import { DialogDataService } from "../common/services/dialog.data.service";
 import { map } from "rxjs/operators";
 
 @Injectable()
 export class PetService extends AbstractHttpService<Pet> {
   dataChange: BehaviorSubject<Pet[]> = new BehaviorSubject<Pet[]>([]);
 
-  constructor(private httpClient: HttpClient, private dialogDataService: DialogDataService) {
+  constructor(private httpClient: HttpClient) {
     super(httpClient, 'http://localhost:3000/pets')
   }
 

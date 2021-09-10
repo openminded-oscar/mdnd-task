@@ -1,0 +1,37 @@
+<div class="container" *ngIf="pet">
+  <div class="header-row">
+    <h3 class="title" mat-dialog-title>Pet {{pet.id}}</h3>
+    <div class="actions">
+      <div class="actions--content">
+        <a mat-button mat-raised-button [routerLink]="['/main']">Back to gallery</a>
+        <button color="accent" mat-button mat-raised-button *ngIf="!editMode" (click)="makeEditable()">Edit</button>
+        <button color="accent" mat-button mat-raised-button *ngIf="editMode" (click)="cancelEdit()">Cancel</button>
+        <button color="accent" mat-button mat-raised-button *ngIf="editMode" type="submit"
+                [disabled]="!petForm.valid"
+                (click)="submit()">
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <form [formGroup]="petForm" (ngSubmit)="submit">
+    Species: {{speciesId}}
+    <app-input-species [style.visibility]="editMode ? 'visible' : 'hidden'" (speciesSelected)="speciesSelected($event)"></app-input-species>
+    Owner: {{ownerId}}
+    <app-input-owner [style.visibility]="editMode ? 'visible' : 'hidden'" (ownerSelected)="ownerSelected($event)"></app-input-owner>
+
+    <div class="form">
+      <mat-checkbox formControlName="vaccinated">Vaccinated</mat-checkbox>
+    </div>
+
+    <div class="form">
+      <mat-form-field appearance="fill">
+        <mat-label>Choose a date</mat-label>
+        <input matInput [matDatepicker]="birthday" formControlName="birthday">
+        <mat-datepicker-toggle matSuffix [for]="birthday"></mat-datepicker-toggle>
+        <mat-datepicker #birthday></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </form>
+</div>

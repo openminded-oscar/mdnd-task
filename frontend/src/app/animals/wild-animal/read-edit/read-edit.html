@@ -2,16 +2,22 @@
   <div class="header-row">
     <h3 class="title">Wild animal (id: {{wildAnimal.id}}, trackingId: {{wildAnimal.trackingId}})</h3>
     <div class="actions">
-      <button color="accent" mat-button mat-raised-button type="submit" [disabled]="!wildAnimalForm.valid"
-              (click)="submit()">
-        Save
-      </button>
+      <div class="actions--content">
+        <a mat-button mat-raised-button [routerLink]="['/main']">Back to gallery</a>
+        <button color="accent" mat-button mat-raised-button *ngIf="!editMode" (click)="makeEditable()">Edit</button>
+        <button color="accent" mat-button mat-raised-button *ngIf="editMode" (click)="cancelEdit()">Cancel</button>
+        <button color="accent" mat-button mat-raised-button *ngIf="editMode" type="submit"
+                [disabled]="!wildAnimalForm.valid"
+                (click)="submit()">
+          Save
+        </button>
+      </div>
     </div>
   </div>
 
   <form [formGroup]="wildAnimalForm" (ngSubmit)="submit">
     Species: {{speciesId}}
-    <app-input-species (speciesSelected)="speciesSelected($event)"></app-input-species>
+    <app-input-species [style.visibility]="editMode ? 'visible' : 'hidden'" (speciesSelected)="speciesSelected($event)"></app-input-species>
 
     <div class="form">
       <mat-form-field color="accent">

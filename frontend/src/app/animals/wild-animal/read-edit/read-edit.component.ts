@@ -7,15 +7,17 @@ import { Pet, WildAnimal } from "../../../common/models/animal";
 
 @Component({
   selector: 'app-edit.dialog',
-  templateUrl: './edit.dialog.html',
-  styleUrls: ['./edit.dialog.css']
+  templateUrl: './read-edit.html',
+  styleUrls: ['./read-edit.scss']
 })
-export class EditWildAnimalDialogComponent implements OnInit {
+export class ReadEditWildAnimalComponent implements OnInit {
   declare currentId: number;
   declare wildAnimal: WildAnimal|null;
 
   declare wildAnimalForm: FormGroup;
   declare speciesId: number;
+
+  editMode: boolean = false;
 
   constructor(private dataService: WildAnimalService,
               private router: Router,
@@ -40,6 +42,7 @@ export class EditWildAnimalDialogComponent implements OnInit {
         birthday: [this.wildAnimal!.birthday, [Validators.required]],
         trackingId: [this.wildAnimal!.trackingId, [Validators.required]],
       });
+      this.wildAnimalForm.disable();
     });
   }
 
@@ -50,13 +53,22 @@ export class EditWildAnimalDialogComponent implements OnInit {
 
     this.dataService.updateItem(wildAnimal)
       .subscribe(result => {
-        alert('updated item');
+        this.router.navigate(['main'])
+          .then();
       });
-    this.router.navigate(['main'])
-      .then();
   }
 
   speciesSelected(speciesId: number) {
     this.speciesId = speciesId;
+  }
+
+  makeEditable(){
+    this.editMode=true;
+    this.wildAnimalForm.enable();
+  }
+
+  cancelEdit(){
+    this.editMode=false;
+    this.wildAnimalForm.disable();
   }
 }

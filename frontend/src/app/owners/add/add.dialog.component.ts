@@ -2,7 +2,6 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import {Component, Inject} from '@angular/core';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { SpeciesService } from "../../animals/species.service";
 import { Owner } from "../../common/models/owner";
 import { OwnerService } from "../owner.service";
 

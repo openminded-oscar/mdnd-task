@@ -19,19 +19,15 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { MatCardModule } from "@angular/material/card";
 import { PetService } from "./animals/pet.service";
-import { DialogDataService } from "./common/services/dialog.data.service";
 import { WildAnimalService } from "./animals/wild-animal.service";
-import { EditWildAnimalDialogComponent } from "./animals/wild-animal/edit/edit.dialog.component";
 import { DeleteWildAnimalDialogComponent } from "./animals/wild-animal/delete/delete.dialog.component";
 import { AddOwnerDialogComponent } from "./owners/add/add.dialog.component";
 import { EditOwnerDialogComponent } from "./owners/edit/edit.dialog.component";
-import { DeleteOwnerDialogComponent } from "./owners/delete/delete.dialog.component";
 import { OwnerService } from "./owners/owner.service";
 import { AnimalManagerComponent } from './animals/animal-manager/animal-manager.component';
 import { RouterModule } from "@angular/router";
 import { CommonModule } from "@angular/common";
 import { AddPetComponent } from "./animals/pet/add/add-pet.component";
-import { EditPetDialogComponent } from "./animals/pet/edit/edit-pet.component";
 import { AddWildAnimalComponent } from "./animals/wild-animal/add/add-wild-animal.component";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatDatepickerModule } from "@angular/material/datepicker";
@@ -40,6 +36,8 @@ import { AddSpeciesComponent } from './animals/species/add/add-species.component
 import { InputSpeciesComponent } from './common/components/input-species/input-species.component';
 import { InputOwnerComponent } from './common/components/input-owner/input-owner.component';
 import { SpeciesService } from "./animals/species.service";
+import { ReadEditPetComponent } from "./animals/pet/read-edit/read-edit-pet.component";
+import { ReadEditWildAnimalComponent } from "./animals/wild-animal/read-edit/read-edit.component";
 
 @NgModule({
   declarations: [
@@ -47,16 +45,15 @@ import { SpeciesService } from "./animals/species.service";
 
     AnimalsListComponent,
     AddPetComponent,
-    EditPetDialogComponent,
+    ReadEditPetComponent,
     DeletePetDialogComponent,
 
     AddWildAnimalComponent,
-    EditWildAnimalDialogComponent,
+    ReadEditWildAnimalComponent,
     DeleteWildAnimalDialogComponent,
 
     AddOwnerDialogComponent,
     EditOwnerDialogComponent,
-    DeleteOwnerDialogComponent,
     AnimalManagerComponent,
     AddSpeciesComponent,
     InputSpeciesComponent,
@@ -78,13 +75,12 @@ import { SpeciesService } from "./animals/species.service";
     MatSortModule,
     MatTableModule,
     MatToolbarModule,
-    MatPaginatorModule,
     MatCardModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [WildAnimalService, PetService, OwnerService, SpeciesService, DialogDataService],
+  providers: [WildAnimalService, PetService, OwnerService, SpeciesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

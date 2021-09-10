@@ -104,7 +104,6 @@ export class AnimalDataSource extends DataSource<Animal> {
 
     this.dataService.getAllAnimals();
 
-
     return merge(...displayDataChanges).pipe(map(() => {
         // Filter data
         this.filteredData = this.dataService.data.slice().filter((animal: Animal) => {

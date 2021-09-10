@@ -38,10 +38,9 @@ export class AddPetComponent implements OnInit {
 
     this.dataService.addItem(pet)
       .subscribe(result => {
-        alert('added item');
+        this.router.navigate(['main'])
+          .then();
       });
-    this.router.navigate(['main'])
-      .then();
   }
 
   speciesSelected(speciesId: number) {

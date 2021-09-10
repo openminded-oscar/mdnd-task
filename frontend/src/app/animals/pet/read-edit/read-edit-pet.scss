@@ -17,3 +17,10 @@
   font-size: 16px;
   flex-grow: 1;
 }
+
+.actions {
+  display: flex;
+  &--content {
+    margin-left: auto;
+  }
+}

@@ -7,16 +7,18 @@ import { switchMap } from "rxjs/operators";
 
 @Component({
   selector: 'app-edit.dialog',
-  templateUrl: './edit-pet.html',
-  styleUrls: ['./edit-pet.css']
+  templateUrl: './read-edit-pet.html',
+  styleUrls: ['./read-edit-pet.scss']
 })
-export class EditPetDialogComponent {
+export class ReadEditPetComponent {
   declare currentId: number;
   declare pet: Pet | null;
 
   declare petForm: FormGroup;
   declare speciesId: number;
   declare ownerId: number;
+
+  editMode: boolean = false;
 
   constructor(private dataService: PetService,
               private router: Router,
@@ -30,14 +32,14 @@ export class EditPetDialogComponent {
         this.currentId = Number(paramMap.get('id'));
         return this.dataService.getAnimalById(this.currentId);
       })
-      // TODO add filter for truthy
     ).subscribe(pet => {
-        this.pet = pet;
-        this.speciesId = pet?.speciesId!;
-        this.petForm = this.formBuilder.group({
-          vaccinated: [this.pet?.vaccinated, [Validators.required]],
-          birthday: [this.pet?.birthday, [Validators.required]],
-        });
+      this.pet = pet;
+      this.speciesId = pet?.speciesId!;
+      this.petForm = this.formBuilder.group({
+        vaccinated: [this.pet?.vaccinated, [Validators.required]],
+        birthday: [this.pet?.birthday, [Validators.required]],
+      });
+      this.petForm.disable();
     });
   }
 
@@ -49,10 +51,9 @@ export class EditPetDialogComponent {
 
     this.dataService.updateItem(pet)
       .subscribe(result => {
-        alert('updated item');
+        this.router.navigate(['main'])
+          .then();
       });
-    this.router.navigate(['main'])
-      .then();
   }
 
   speciesSelected(speciesId: number) {
@@ -61,5 +62,15 @@ export class EditPetDialogComponent {
 
   ownerSelected(ownerId: number) {
     this.ownerId = ownerId;
+  }
+
+  makeEditable() {
+    this.editMode = true;
+    this.petForm.enable();
+  }
+
+  cancelEdit() {
+    this.editMode = false;
+    this.petForm.disable();
   }
 }

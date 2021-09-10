@@ -66,7 +66,7 @@
   </mat-table>
 
 
-  <div class="no-results" [style.display]="dataSource.renderedData.length == 0 ? '' : 'none'">
+  <div class="no-results" *ngIf="dataSource" [style.display]="dataSource.renderedData.length == 0 ? '' : 'none'">
     No results
   </div>
 </div>

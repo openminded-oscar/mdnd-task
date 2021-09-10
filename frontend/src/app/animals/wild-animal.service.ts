@@ -3,14 +3,13 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import {WildAnimal} from '../common/models/animal';
 import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { AbstractHttpService } from "../common/services/abstract.http.service";
-import { DialogDataService } from "../common/services/dialog.data.service";
 import { map } from "rxjs/operators";
 
 @Injectable()
 export class WildAnimalService extends AbstractHttpService<WildAnimal> {
   dataChange: BehaviorSubject<WildAnimal[]> = new BehaviorSubject<WildAnimal[]>([]);
 
-  constructor (private httpClient: HttpClient, private dialogDataService: DialogDataService) {
+  constructor (private httpClient: HttpClient) {
     super(httpClient, 'http://localhost:3000/wild-animals')
   }
 
