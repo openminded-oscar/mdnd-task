@@ -1,56 +1,29 @@
-<div class="container">
-  <h3 mat-dialog-title>Animal id: </h3>
-  {{pet|json}}
-  <app-input-species></app-input-species>
-  <app-input-owner></app-input-owner>
+<div class="container" *ngIf="pet">
+  <div class="header-row">
+    <h3 class="title" mat-dialog-title>Pet {{pet.id}}</h3>
+    <div class="actions">
+      <button color="accent" mat-button mat-raised-button type="submit" [disabled]="!petForm.valid" (click)="submit()">
+        Save
+      </button>
+    </div>
+  </div>
 
-<!--  <form class="mat-dialog-content" (ngSubmit)="submit" #formControl="ngForm">-->
+  <form [formGroup]="petForm" (ngSubmit)="submit">
+    Species: {{speciesId}}
+    <app-input-species (speciesSelected)="speciesSelected($event)"></app-input-species>
+    <app-input-owner (ownerSelected)="ownerSelected($event)"></app-input-owner>
 
-<!--    <div class="form">-->
-<!--      <mat-form-field color="accent">-->
-<!--        <input matInput #input class="form-control" placeholder="Id" [(ngModel)]="data.id" name="id" required >-->
-<!--        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>-->
-<!--      </mat-form-field>-->
-<!--    </div>-->
+    <div class="form">
+      <mat-checkbox formControlName="vaccinated">Vaccinated</mat-checkbox>
+    </div>
 
-<!--    &lt;!&ndash;Textarea for demo purposes&ndash;&gt;-->
-<!--    <div class="form">-->
-<!--      <mat-form-field color="accent">-->
-<!--        <textarea matInput #input class="form-control" placeholder="Title" [(ngModel)]="data.title" name="title" required ></textarea>-->
-<!--        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>-->
-<!--      </mat-form-field>-->
-<!--    </div>-->
-
-<!--    &lt;!&ndash;Contains mat-hint for characters count and has maxLengt set&ndash;&gt;-->
-<!--    <div class="form">-->
-<!--      <mat-form-field color="accent">-->
-<!--        <input matInput #inputstate class="form-control" placeholder="State" [(ngModel)]="data.state" name="state" maxlength="10" required >-->
-<!--        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>-->
-<!--        <mat-hint align="end">{{inputstate.value?.length || 0}}/10</mat-hint>-->
-<!--      </mat-form-field>-->
-<!--    </div>-->
-
-<!--    <div class="form">-->
-<!--        <mat-form-field color="accent">-->
-<!--          <input matInput placeholder="Url" [(ngModel)]="data.url" name="url">-->
-<!--        </mat-form-field>-->
-<!--    </div>-->
-
-<!--    <div class="form">-->
-<!--      <mat-form-field color="accent">-->
-<!--        <input matInput placeholder="Created at" [(ngModel)]="data.created_at" name="created_at">-->
-<!--      </mat-form-field>-->
-<!--    </div>-->
-
-<!--    <div class="form">-->
-<!--      <mat-form-field color="accent">-->
-<!--        <input matInput placeholder="Updated at" [(ngModel)]="data.updated_at" name="updated_at">-->
-<!--      </mat-form-field>-->
-<!--    </div>-->
-
-<!--    <div mat-dialog-actions>-->
-<!--      <button mat-button [type]="submit" [disabled]="!formControl.valid" [mat-dialog-close]="1" (click)="stopEdit()">Save</button>-->
-<!--      <button mat-button (click)="onNoClick()" tabindex="-1">Cancel</button>-->
-<!--    </div>-->
-<!--  </form>-->
+    <div class="form">
+      <mat-form-field appearance="fill">
+        <mat-label>Choose a date</mat-label>
+        <input matInput [matDatepicker]="birthday" formControlName="birthday">
+        <mat-datepicker-toggle matSuffix [for]="birthday"></mat-datepicker-toggle>
+        <mat-datepicker #birthday></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </form>
 </div>

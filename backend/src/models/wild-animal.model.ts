@@ -4,9 +4,9 @@ import {Animal} from '.';
 @model()
 export class WildAnimal extends Animal {
   @property({
-    type: 'number',
+    type: 'string',
   })
-  trackingId?: number;
+  trackingId?: string;
 
 
   constructor(data?: Partial<WildAnimal>) {

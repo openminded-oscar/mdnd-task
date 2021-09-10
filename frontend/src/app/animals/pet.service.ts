@@ -1,25 +1,25 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Animal } from '../common/models/animal';
+import { Pet } from '../common/models/animal';
 import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { AbstractHttpService } from "../common/services/abstract.http.service";
 import { DialogDataService } from "../common/services/dialog.data.service";
 import { map } from "rxjs/operators";
 
 @Injectable()
-export class PetService extends AbstractHttpService<Animal> {
-  dataChange: BehaviorSubject<Animal[]> = new BehaviorSubject<Animal[]>([]);
+export class PetService extends AbstractHttpService<Pet> {
+  dataChange: BehaviorSubject<Pet[]> = new BehaviorSubject<Pet[]>([]);
 
   constructor(private httpClient: HttpClient, private dialogDataService: DialogDataService) {
     super(httpClient, 'http://localhost:3000/pets')
   }
 
-  get data(): Animal[] {
+  get data(): Pet[] {
     return this.dataChange.value;
   }
 
   getAllAnimals(): void {
-    this.findAll().subscribe((data: HttpResponse<Animal[]>) => {
+    this.findAll().subscribe((data: HttpResponse<Pet[]>) => {
         this.dataChange.next(data.body ? data.body : []);
       },
       (error: HttpErrorResponse) => {
@@ -27,19 +27,19 @@ export class PetService extends AbstractHttpService<Animal> {
       });
   }
 
-  getAnimalById(id: any): Observable<Animal|null> {
+  getAnimalById(id: any): Observable<Pet|null> {
     return this.findById(id)
-      .pipe(map((data: HttpResponse<Animal>) => data.body));
+      .pipe(map((data: HttpResponse<Pet>) => data.body));
   }
 
-  addItem(animal: Animal): Observable<Animal|null> {
+  addItem(animal: Pet): Observable<Pet|null> {
     return this.save(animal)
-      .pipe(map((data: HttpResponse<Animal>) => data.body));
+      .pipe(map((data: HttpResponse<Pet>) => data.body));
   }
 
-  updateItem(animal: Animal): Observable<Animal|null>  {
+  updateItem(animal: Pet): Observable<Pet|null>  {
     return this.update(animal)
-      .pipe(map((data: HttpResponse<Animal>) => data.body));
+      .pipe(map((data: HttpResponse<Pet>) => data.body));
   }
 
   deleteItem(id: string): void {

@@ -4,11 +4,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PetService } from "../../pet.service";
 import { Router } from "@angular/router";
 import { Pet } from "../../../common/models/animal";
-import { MatDialog } from "@angular/material/dialog";
-import { DeletePetDialogComponent } from "../delete/delete.dialog.component";
-import { DeleteWildAnimalDialogComponent } from "../../wild-animal/delete/delete.dialog.component";
-import { AddSpeciesComponent } from "../../species/add/add-species.component";
-import { AddOwnerDialogComponent } from "../../../owners/add/add.dialog.component";
 
 @Component({
   selector: 'app-add.dialog',

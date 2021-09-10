@@ -1,25 +1,25 @@
 import {Injectable} from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import {Animal} from '../common/models/animal';
+import {WildAnimal} from '../common/models/animal';
 import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { AbstractHttpService } from "../common/services/abstract.http.service";
 import { DialogDataService } from "../common/services/dialog.data.service";
 import { map } from "rxjs/operators";
 
 @Injectable()
-export class WildAnimalService extends AbstractHttpService<Animal> {
-  dataChange: BehaviorSubject<Animal[]> = new BehaviorSubject<Animal[]>([]);
+export class WildAnimalService extends AbstractHttpService<WildAnimal> {
+  dataChange: BehaviorSubject<WildAnimal[]> = new BehaviorSubject<WildAnimal[]>([]);
 
   constructor (private httpClient: HttpClient, private dialogDataService: DialogDataService) {
     super(httpClient, 'http://localhost:3000/wild-animals')
   }
 
-  get data(): Animal[] {
+  get data(): WildAnimal[] {
     return this.dataChange.value;
   }
 
   getAllAnimals(): void {
-    this.findAll().subscribe((data: HttpResponse<Animal[]>) => {
+    this.findAll().subscribe((data: HttpResponse<WildAnimal[]>) => {
         this.dataChange.next(data.body ? data.body : []);
       },
       (error: HttpErrorResponse) => {
@@ -27,19 +27,19 @@ export class WildAnimalService extends AbstractHttpService<Animal> {
       });
   }
 
-  getAnimalById(id: any): Observable<Animal|null> {
+  getAnimalById(id: any): Observable<WildAnimal|null> {
     return this.findById(id)
-      .pipe(map((data: HttpResponse<Animal>) => data.body));
+      .pipe(map((data: HttpResponse<WildAnimal>) => data.body));
   }
 
-  addItem(animal: Animal): Observable<Animal|null> {
+  addItem(animal: WildAnimal): Observable<WildAnimal|null> {
     return this.save(animal)
-      .pipe(map((data: HttpResponse<Animal>) => data.body));
+      .pipe(map((data: HttpResponse<WildAnimal>) => data.body));
   }
 
-  updateItem(animal: Animal): Observable<Animal|null>  {
+  updateItem(animal: WildAnimal): Observable<WildAnimal|null>  {
     return this.update(animal)
-      .pipe(map((data: HttpResponse<Animal>) => data.body));
+      .pipe(map((data: HttpResponse<WildAnimal>) => data.body));
   }
 
   deleteItem(id: string): void {

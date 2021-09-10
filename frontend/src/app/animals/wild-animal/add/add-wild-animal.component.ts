@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { WildAnimalService } from "../../wild-animal.service";
 import { Router } from "@angular/router";
 import { WildAnimal } from "../../../common/models/animal";
@@ -11,7 +11,7 @@ import { WildAnimal } from "../../../common/models/animal";
   styleUrls: ['./add-wild.scss']
 })
 export class AddWildAnimalComponent {
-  petInitial: WildAnimal = {
+  animalInitial: WildAnimal = {
     vaccinated: false,
     birthday: new Date(),
     trackingId: undefined
@@ -26,14 +26,17 @@ export class AddWildAnimalComponent {
 
   ngOnInit(): void {
     this.wildAnimalForm = this.formBuilder.group({
-      vaccinated: [this.petInitial.vaccinated, [Validators.required]],
-      birthday: [this.petInitial.birthday, [Validators.required]],
-      trackingId: [this.petInitial.trackingId, [Validators.required]],
+      vaccinated: [this.animalInitial.vaccinated, [Validators.required]],
+      birthday: [this.animalInitial.birthday, [Validators.required]],
+      trackingId: [this.animalInitial.trackingId, [Validators.required]],
     });
   }
 
   submit() {
-    this.dataService.addItem(this.wildAnimalForm.value)
+    const wildAnimal = this.wildAnimalForm.value;
+    wildAnimal.speciesId = this.speciesId;
+
+    this.dataService.addItem(wildAnimal)
       .subscribe(result => {
         alert('added item');
       });

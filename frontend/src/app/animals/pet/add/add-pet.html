@@ -9,6 +9,7 @@
   </div>
 
   <form [formGroup]="petForm" (ngSubmit)="submit">
+    Species: {{speciesId}}
     <app-input-species (speciesSelected)="speciesSelected($event)"></app-input-species>
     <app-input-owner (ownerSelected)="ownerSelected($event)"></app-input-owner>
 

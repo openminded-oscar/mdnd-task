@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, NgForm, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PetService } from "../../pet.service";
 import { ActivatedRoute, ParamMap, Router } from "@angular/router";
 import { Pet } from "../../../common/models/animal";
@@ -12,32 +12,54 @@ import { switchMap } from "rxjs/operators";
 })
 export class EditPetDialogComponent {
   declare currentId: number;
-  declare pet: Pet|null;
+  declare pet: Pet | null;
 
-  constructor(private dataService: PetService, private router: Router, private route: ActivatedRoute) {}
+  declare petForm: FormGroup;
+  declare speciesId: number;
+  declare ownerId: number;
+
+  constructor(private dataService: PetService,
+              private router: Router,
+              private route: ActivatedRoute,
+              private formBuilder: FormBuilder) {
+  }
 
   ngOnInit() {
-    this.route.paramMap.subscribe((params: ParamMap) => {
-      this.currentId = Number(params.get('id'));
+    this.route.paramMap.pipe(
+      switchMap((paramMap: ParamMap) => {
+        this.currentId = Number(paramMap.get('id'));
+        return this.dataService.getAnimalById(this.currentId);
+      })
+      // TODO add filter for truthy
+    ).subscribe(pet => {
+        this.pet = pet;
+        this.speciesId = pet?.speciesId!;
+        this.petForm = this.formBuilder.group({
+          vaccinated: [this.pet?.vaccinated, [Validators.required]],
+          birthday: [this.pet?.birthday, [Validators.required]],
+        });
     });
-
-    this.route.paramMap.pipe(switchMap((paramMap: ParamMap) => {
-      this.currentId = Number(paramMap.get('id'));
-      return this.dataService.getAnimalById(this.currentId);
-    })).subscribe(pet => this.pet = pet);
   }
 
-  formControl = new FormControl('', [
-    Validators.required
-  ]);
+  submit() {
+    const pet = this.petForm.value;
+    pet.id = this.pet!.id;
+    pet.speciesId = this.speciesId;
+    pet.ownerId = this.ownerId;
 
-  getErrorMessage() {
-    return this.formControl.hasError('required') ? 'Required field' :
-      this.formControl.hasError('email') ? 'Not a valid email' :
-        '';
+    this.dataService.updateItem(pet)
+      .subscribe(result => {
+        alert('updated item');
+      });
+    this.router.navigate(['main'])
+      .then();
   }
 
-  submit(form: NgForm) {
+  speciesSelected(speciesId: number) {
+    this.speciesId = speciesId;
+  }
 
+  ownerSelected(ownerId: number) {
+    this.ownerId = ownerId;
   }
 }

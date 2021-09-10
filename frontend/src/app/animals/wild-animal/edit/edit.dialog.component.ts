@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, NgForm, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { WildAnimalService } from "../../wild-animal.service";
 import { ActivatedRoute, ParamMap, Router } from "@angular/router";
 import { switchMap } from "rxjs/operators";
@@ -12,10 +12,17 @@ import { Pet, WildAnimal } from "../../../common/models/animal";
 })
 export class EditWildAnimalDialogComponent implements OnInit {
   declare currentId: number;
-  declare animal: WildAnimal|null;
+  declare wildAnimal: WildAnimal|null;
 
-  constructor(private dataService: WildAnimalService, private router: Router, private route: ActivatedRoute) {
+  declare wildAnimalForm: FormGroup;
+  declare speciesId: number;
+
+  constructor(private dataService: WildAnimalService,
+              private router: Router,
+              private route: ActivatedRoute,
+              private formBuilder: FormBuilder) {
   }
+
 
   ngOnInit() {
     this.route.paramMap.subscribe((params: ParamMap) => {
@@ -25,20 +32,31 @@ export class EditWildAnimalDialogComponent implements OnInit {
     this.route.paramMap.pipe(switchMap((paramMap: ParamMap) => {
       this.currentId = Number(paramMap.get('id'));
       return this.dataService.getAnimalById(this.currentId);
-    })).subscribe(wildAnimal => this.animal = wildAnimal);
+    })).subscribe(wildAnimal => {
+      this.wildAnimal = wildAnimal;
+      this.speciesId = this.wildAnimal?.speciesId!;
+      this.wildAnimalForm = this.formBuilder.group({
+        vaccinated: [this.wildAnimal!.vaccinated, [Validators.required]],
+        birthday: [this.wildAnimal!.birthday, [Validators.required]],
+        trackingId: [this.wildAnimal!.trackingId, [Validators.required]],
+      });
+    });
   }
 
-  formControl = new FormControl('', [
-    Validators.required
-  ]);
+  submit() {
+    const wildAnimal = this.wildAnimalForm.value;
+    wildAnimal.id = this.wildAnimal!.id;
+    wildAnimal.speciesId = this.speciesId;
 
-  getErrorMessage() {
-    return this.formControl.hasError('required') ? 'Required field' :
-      this.formControl.hasError('email') ? 'Not a valid email' :
-        '';
+    this.dataService.updateItem(wildAnimal)
+      .subscribe(result => {
+        alert('updated item');
+      });
+    this.router.navigate(['main'])
+      .then();
   }
 
-  submit(form: NgForm) {
-
+  speciesSelected(speciesId: number) {
+    this.speciesId = speciesId;
   }
 }
