@@ -1,14 +1,7 @@
-import {Entity, model, property} from '@loopback/repository';
+import {Model, model, property} from '@loopback/repository';
 
 @model()
-export class Address extends Entity {
-  @property({
-    type: 'number',
-    id: true,
-    generated: true,
-  })
-  id: number;
-
+export class Address extends Model {
   @property({
     type: 'string',
     required: true,
@@ -17,6 +10,8 @@ export class Address extends Entity {
 
   @property({
     type: 'string',
+    id: true,
+    generated: false,
     required: true,
   })
   city: string;
@@ -29,14 +24,9 @@ export class Address extends Entity {
 
   @property({
     type: 'string',
-    required: true,
   })
-  zipCode: string;
+  zipCode?: string;
 
-  @property({
-    type: 'number',
-  })
-  ownerId?: number;
 
   constructor(data?: Partial<Address>) {
     super(data);

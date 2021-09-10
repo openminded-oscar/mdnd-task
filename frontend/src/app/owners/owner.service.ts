@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { AbstractHttpService } from "../common/services/abstract.http.service";
 import { DialogDataService } from "../common/services/dialog.data.service";
 import { Owner } from "../common/models/owner";
+import { Species } from "../common/models/species";
+import { map } from "rxjs/operators";
 
 @Injectable()
 export class OwnerService extends AbstractHttpService<Owner> {
@@ -26,14 +28,9 @@ export class OwnerService extends AbstractHttpService<Owner> {
       });
   }
 
-  addItem(Owner: Owner): void {
-    this.save(Owner).subscribe(data => {
-        this.dialogDataService.dialogData = data.body;
-        alert('Successfully added');
-      },
-      (err: HttpErrorResponse) => {
-        alert('Error occurred. Details: ' + err.name + ' ' + err.message);
-      });
+  addItem(owner: Owner): Observable<Owner|null> {
+    return this.save(owner)
+      .pipe(map((data: HttpResponse<Owner>) => data.body));
   }
 
   updateItem(Owner: Owner): void {

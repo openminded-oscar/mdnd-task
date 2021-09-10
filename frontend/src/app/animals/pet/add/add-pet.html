@@ -11,6 +11,7 @@
   <form [formGroup]="petForm" (ngSubmit)="submit">
     Species: {{speciesId}}
     <app-input-species (speciesSelected)="speciesSelected($event)"></app-input-species>
+    Owner: {{ownerId}}
     <app-input-owner (ownerSelected)="ownerSelected($event)"></app-input-owner>
 
     <div class="form">

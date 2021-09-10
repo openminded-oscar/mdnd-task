@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { AddSpeciesComponent } from "../../../animals/species/add/add-species.component";
 import { MatDialog } from "@angular/material/dialog";
 
