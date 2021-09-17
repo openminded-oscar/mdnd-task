@@ -11,7 +11,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -38,6 +37,8 @@ import { InputOwnerComponent } from './common/components/input-owner/input-owner
 import { SpeciesService } from "./animals/species.service";
 import { ReadEditPetComponent } from "./animals/pet/read-edit/read-edit-pet.component";
 import { ReadEditWildAnimalComponent } from "./animals/wild-animal/read-edit/read-edit.component";
+import { MatAutocomplete, MatAutocompleteModule } from "@angular/material/autocomplete";
+import { MatTabsModule } from "@angular/material/tabs";
 
 @NgModule({
   declarations: [
@@ -59,27 +60,30 @@ import { ReadEditWildAnimalComponent } from "./animals/wild-animal/read-edit/rea
     InputSpeciesComponent,
     InputOwnerComponent
   ],
-  imports: [
-    CommonModule,
-    BrowserModule,
-    AppRoutingModule,
-    RouterModule,
-    BrowserAnimationsModule,
-    MatDialogModule,
-    MatButtonModule,
-    MatCheckboxModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatInputModule,
-    MatIconModule,
-    MatSortModule,
-    MatTableModule,
-    MatToolbarModule,
-    MatCardModule,
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule
-  ],
+    imports: [
+        CommonModule,
+        BrowserModule,
+        AppRoutingModule,
+        RouterModule,
+        BrowserAnimationsModule,
+        MatAutocompleteModule,
+        MatDialogModule,
+        MatButtonModule,
+        MatCheckboxModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatInputModule,
+        MatIconModule,
+        MatSortModule,
+        MatTableModule,
+        MatToolbarModule,
+        MatCardModule,
+        HttpClientModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatAutocompleteModule,
+        MatTabsModule
+    ],
   providers: [WildAnimalService, PetService, OwnerService, SpeciesService],
   bootstrap: [AppComponent]
 })

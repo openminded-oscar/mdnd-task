@@ -11,19 +11,19 @@ export class SpeciesService extends AbstractHttpService<Species> {
     super(httpClient, 'http://localhost:3000/species')
   }
 
-  getAll(): Observable<Species[]|null> {
+  getAll(): Observable<Species[]> {
     return this.findAll()
-      .pipe(map((data: HttpResponse<Species[]>) => data.body));
+      .pipe(map((data: HttpResponse<Species[]>) => data.body!));
   }
 
-  getById(id: any): Observable<Species|null> {
+  getById(id: any): Observable<Species> {
     return this.findById(id)
-      .pipe(map((data: HttpResponse<Species>) => data.body));
+      .pipe(map((data: HttpResponse<Species>) => data.body!));
   }
 
-  addItem(species: Species): Observable<Species|null> {
+  addItem(species: Species): Observable<Species> {
     return this.save(species)
-      .pipe(map((data: HttpResponse<Species>) => data.body));
+      .pipe(map((data: HttpResponse<Species>) => data.body!));
   }
 }
 

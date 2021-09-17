@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PetService } from "../../pet.service";
 import { Router } from "@angular/router";
 import { Pet } from "../../../common/models/animal";
+import { Species } from "../../../common/models/species";
 
 @Component({
   selector: 'app-add.dialog',
@@ -16,7 +17,7 @@ export class AddPetComponent implements OnInit {
     birthday: new Date()
   }
   declare petForm: FormGroup;
-  declare speciesId: number;
+  declare species: Species;
   declare ownerId: number;
 
   constructor(public dataService: PetService,
@@ -33,7 +34,7 @@ export class AddPetComponent implements OnInit {
 
   submit() {
     const pet = this.petForm.value;
-    pet.speciesId = this.speciesId;
+    pet.speciesId = this.species.id;
     pet.ownerId = this.ownerId;
 
     this.dataService.addItem(pet)
@@ -43,8 +44,8 @@ export class AddPetComponent implements OnInit {
       });
   }
 
-  speciesSelected(speciesId: number) {
-    this.speciesId = speciesId;
+  speciesSelected(species: Species) {
+    this.species = species;
   }
 
   ownerSelected(ownerId: number) {

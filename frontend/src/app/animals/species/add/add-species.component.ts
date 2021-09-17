@@ -11,7 +11,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 })
 export class AddSpeciesComponent implements OnInit {
   speciesInitial: Species = {
-    label: undefined
+    label: ''
   };
 
   declare speciesForm: FormGroup;

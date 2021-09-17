@@ -1,9 +1,18 @@
 <div class="species">
-  <div class="species--search">
-    <mat-form-field [style.width.px]=200>
-      <input matInput type="text" name="search-species" placeholder="Search species input TODO">
-    </mat-form-field>
+  <div class="species--search" [formGroup]="parentFormGroup">
+    <div class="custom-wrapper-example" matAutocompleteOrigin #origin="matAutocompleteOrigin">
+      <input
+        placeholder="Type for species here..."
+        matInput
+        [formControl]="formControl"
+        [matAutocomplete]="auto"
+        [matAutocompleteConnectedTo]="origin">
+    </div>
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)='onSelect($event.option.value)' [displayWith]="displaySelectedSpecies.bind(this)">
+      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">{{option.label}}</mat-option>
+    </mat-autocomplete>
   </div>
+
   <div class="species--add">
     <button mat-button mat-raised-button (click)="addSpecies()">
       Add new species

@@ -26,19 +26,21 @@ export class PetService extends AbstractHttpService<Pet> {
       });
   }
 
-  getAnimalById(id: any): Observable<Pet|null> {
+  getAnimalById(id: any): Observable<Pet> {
     return this.findById(id)
-      .pipe(map((data: HttpResponse<Pet>) => data.body));
+      .pipe(map((data: HttpResponse<Pet>) => data.body!));
   }
 
-  addItem(animal: Pet): Observable<Pet|null> {
+  addItem(animal: Pet): Observable<Pet> {
+    delete animal.species;
     return this.save(animal)
-      .pipe(map((data: HttpResponse<Pet>) => data.body));
+      .pipe(map((data: HttpResponse<Pet>) => data.body!));
   }
 
-  updateItem(animal: Pet): Observable<Pet|null>  {
+  updateItem(animal: Pet): Observable<Pet>  {
+    delete animal.species;
     return this.update(animal)
-      .pipe(map((data: HttpResponse<Pet>) => data.body));
+      .pipe(map((data: HttpResponse<Pet>) => data.body!));
   }
 
   deleteItem(id: string): void {

@@ -26,19 +26,21 @@ export class WildAnimalService extends AbstractHttpService<WildAnimal> {
       });
   }
 
-  getAnimalById(id: any): Observable<WildAnimal|null> {
+  getAnimalById(id: any): Observable<WildAnimal> {
     return this.findById(id)
-      .pipe(map((data: HttpResponse<WildAnimal>) => data.body));
+      .pipe(map((data: HttpResponse<WildAnimal>) => data.body!));
   }
 
-  addItem(animal: WildAnimal): Observable<WildAnimal|null> {
+  addItem(animal: WildAnimal): Observable<WildAnimal> {
+    delete animal.species;
     return this.save(animal)
-      .pipe(map((data: HttpResponse<WildAnimal>) => data.body));
+      .pipe(map((data: HttpResponse<WildAnimal>) => data.body!));
   }
 
-  updateItem(animal: WildAnimal): Observable<WildAnimal|null>  {
+  updateItem(animal: WildAnimal): Observable<WildAnimal>  {
+    delete animal.species;
     return this.update(animal)
-      .pipe(map((data: HttpResponse<WildAnimal>) => data.body));
+      .pipe(map((data: HttpResponse<WildAnimal>) => data.body!));
   }
 
   deleteItem(id: string): void {

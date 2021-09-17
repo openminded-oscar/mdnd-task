@@ -1,23 +1,24 @@
-import {Component} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { WildAnimalService } from "../../wild-animal.service";
 import { Router } from "@angular/router";
 import { WildAnimal } from "../../../common/models/animal";
+import { Species } from "../../../common/models/species";
 
 @Component({
   selector: 'app-add.dialog',
   templateUrl: './add-wild.html',
   styleUrls: ['./add-wild.scss']
 })
-export class AddWildAnimalComponent {
+export class AddWildAnimalComponent implements OnInit{
   animalInitial: WildAnimal = {
     vaccinated: false,
     birthday: new Date(),
     trackingId: undefined
   }
   declare wildAnimalForm: FormGroup;
-  declare speciesId: number;
+  declare species: Species;
 
   constructor(public dataService: WildAnimalService,
               private router: Router,
@@ -34,7 +35,7 @@ export class AddWildAnimalComponent {
 
   submit() {
     const wildAnimal = this.wildAnimalForm.value;
-    wildAnimal.speciesId = this.speciesId;
+    wildAnimal.speciesId = this.species.id;
 
     this.dataService.addItem(wildAnimal)
       .subscribe(result => {
@@ -43,7 +44,7 @@ export class AddWildAnimalComponent {
       });
   }
 
-  speciesSelected(speciesId: number) {
-    this.speciesId = speciesId;
+  speciesSelected(species: Species) {
+    this.species = species;
   }
 }

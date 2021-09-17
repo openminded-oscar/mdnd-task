@@ -1,4 +1,5 @@
 import { Owner } from "./owner";
+import { Species } from "./species";
 
 export interface Animal {
   id?: number;
@@ -6,6 +7,7 @@ export interface Animal {
   vaccinated?: boolean;
   birthday?: Date;
   speciesId?: number;
+  species?: Species;
   created_at?: string;
   updated_at?: string;
 }

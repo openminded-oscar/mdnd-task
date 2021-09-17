@@ -11,8 +11,8 @@
   </div>
 
   <form [formGroup]="wildAnimalForm" (ngSubmit)="submit">
-    Species: {{speciesId}}
-    <app-input-species (speciesSelected)="speciesSelected($event)"></app-input-species>
+    <ng-container *ngIf="species">Species selected: {{species.label}}</ng-container>
+    <app-input-species (speciesSelected)="speciesSelected($event)" [parentFormGroup]="wildAnimalForm"></app-input-species>
 
     <div class="form">
       <mat-form-field color="accent">

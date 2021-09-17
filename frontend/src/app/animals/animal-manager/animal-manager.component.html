@@ -1,11 +1,12 @@
 <div class="lists-container">
-  <mat-card>
-    <app-animals-list [displayedColumns]=petsDisplayedColumns [type]="'pet'">
-    </app-animals-list>
-  </mat-card>
-
-  <mat-card>
-    <app-animals-list [displayedColumns]=wildAnimalsDisplayedColumns [type]="'wild'">
-    </app-animals-list>
-  </mat-card>
+  <mat-tab-group>
+    <mat-tab label="Pets">
+      <app-animals-list [displayedColumns]=petsDisplayedColumns [type]="'pet'">
+      </app-animals-list>
+    </mat-tab>
+    <mat-tab label="Wild animals">
+      <app-animals-list [displayedColumns]=wildAnimalsDisplayedColumns [type]="'wild'">
+      </app-animals-list>
+    </mat-tab>
+  </mat-tab-group>
 </div>

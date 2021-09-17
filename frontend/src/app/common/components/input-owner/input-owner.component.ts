@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { AddOwnerDialogComponent } from "../../../owners/add/add.dialog.component";
 import { MatDialog } from "@angular/material/dialog";
 

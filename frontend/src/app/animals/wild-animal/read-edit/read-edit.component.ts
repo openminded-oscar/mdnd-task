@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { WildAnimalService } from "../../wild-animal.service";
 import { ActivatedRoute, ParamMap, Router } from "@angular/router";
 import { switchMap } from "rxjs/operators";
-import { Pet, WildAnimal } from "../../../common/models/animal";
+import { WildAnimal } from "../../../common/models/animal";
+import { Species } from "../../../common/models/species";
+import { SpeciesService } from "../../species.service";
 
 @Component({
   selector: 'app-edit.dialog',
@@ -12,14 +14,16 @@ import { Pet, WildAnimal } from "../../../common/models/animal";
 })
 export class ReadEditWildAnimalComponent implements OnInit {
   declare currentId: number;
-  declare wildAnimal: WildAnimal|null;
+  declare wildAnimal: WildAnimal;
 
   declare wildAnimalForm: FormGroup;
-  declare speciesId: number;
+
+  declare species: Species;
 
   editMode: boolean = false;
 
   constructor(private dataService: WildAnimalService,
+              private speciesService: SpeciesService,
               private router: Router,
               private route: ActivatedRoute,
               private formBuilder: FormBuilder) {
@@ -27,16 +31,15 @@ export class ReadEditWildAnimalComponent implements OnInit {
 
 
   ngOnInit() {
-    this.route.paramMap.subscribe((params: ParamMap) => {
-      this.currentId = Number(params.get('id'));
-    });
-
     this.route.paramMap.pipe(switchMap((paramMap: ParamMap) => {
       this.currentId = Number(paramMap.get('id'));
       return this.dataService.getAnimalById(this.currentId);
     })).subscribe(wildAnimal => {
+      this.speciesService.getById(wildAnimal.speciesId)
+        .subscribe(species=>{
+          this.species = species;
+        });
       this.wildAnimal = wildAnimal;
-      this.speciesId = this.wildAnimal?.speciesId!;
       this.wildAnimalForm = this.formBuilder.group({
         vaccinated: [this.wildAnimal!.vaccinated, [Validators.required]],
         birthday: [this.wildAnimal!.birthday, [Validators.required]],
@@ -49,7 +52,7 @@ export class ReadEditWildAnimalComponent implements OnInit {
   submit() {
     const wildAnimal = this.wildAnimalForm.value;
     wildAnimal.id = this.wildAnimal!.id;
-    wildAnimal.speciesId = this.speciesId;
+    wildAnimal.speciesId = this.species.id;
 
     this.dataService.updateItem(wildAnimal)
       .subscribe(result => {
@@ -58,8 +61,8 @@ export class ReadEditWildAnimalComponent implements OnInit {
       });
   }
 
-  speciesSelected(speciesId: number) {
-    this.speciesId = speciesId;
+  speciesSelected(species: Species) {
+    this.species = species;
   }
 
   makeEditable(){
